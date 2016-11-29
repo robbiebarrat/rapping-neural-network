@@ -12,10 +12,9 @@ def play_mp3(path):
 engine = pyttsx.init()
 lyrics = open("neural_rap.txt").read().split("\n") #this reads lines from a file called 'neural_rap.txt'
 rate = engine.getProperty('rate')
-engine.setProperty('rate', rate - 10)
+engine.setProperty('rate', rate - 30)
 voices = engine.getProperty('voices')
-for voice in voices:
-    print voice
+
 wholesong = ""
 for i in lyrics:
     wholesong += i
@@ -34,5 +33,5 @@ def beat():
 
 
 Thread(target=beat).start()
-sleep(16.8) # just waits a little bit to start talking
+sleep(14) # just waits a little bit to start talking
 Thread(target=sing).start()
