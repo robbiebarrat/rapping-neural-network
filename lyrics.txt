@@ -1,0 +1,1 @@
+backspace this and fill this document up with newline delimited lyrics - leave out the lines like [bridge] or [outro] and only include the actual lyrics.
