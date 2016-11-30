@@ -7,13 +7,21 @@ For example: I could feed it the lyrics of around 10 rap songs from various arti
 
 
 # How to use
-0. Install pybrain and pyttsx.
+0. install 
 
-1. Fill "lyrics.txt" with rap lyrics of your choosing - the more the better, as this is used to make a dataset and in this case large datasets return better results. Maybe around 6 or 7 songs is good -- avoid putting things like "[bridge]" or "[intro]" in there - only put in actual lines from the song - and separate each line by a newline (press the 'enter' key, usually).
+  pip install -U -r requirements.txt 
 
-2. Run "deep rap.py" - it will start returning rap lyrics, some of which are just empty or only 1 or 2 lines. I'm working on automating this part (perhaps with another neural network!), but for now you just have to copy and paste the larger verses it comes up with into a text document called neural_rap.txt (the longer verses are almost always good/coherent, and by longer i mean around 5 lines or longer).
 
-3. run speechtest.py, you can replace the mp3 file i've included with your own beat (mp3 format). this is a very small program that just runs a text to speech of the neural network's lyrics over a beat.
+1. Fill "lyrics.txt" with rap lyrics of your choosing - the more the better, as this is used to make a dataset and in this case large datasets return better results. Maybe around 6 or 7 songs is good --
+
+   avoid putting things like "[bridge]" or "[intro]" in there - only put in actual lines from the song - and separate each line by a newline (press the 'enter' key, usually).
+
+2. 
+    puthon deeprap.py 
+    neural_rap.txt (the longer verses are almost always good/coherent, and by longer i mean around 5 lines or longer).
+
+3.  
+    python speechtest.py, you can replace the mp3 file i've included with your own beat (mp3 format). this is a very small program that just runs a text to speech of the neural network's lyrics over a beat.
 
 4. Enjoy (maybe) listening to your neural network's rap!
 
