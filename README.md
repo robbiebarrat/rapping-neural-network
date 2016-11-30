@@ -14,3 +14,10 @@ For example: I could feed it the lyrics of around 10 rap songs from various arti
 3. run speechtest.py, you can replace the mp3 file i've included with your own beat (mp3 format). this is a very small program that just runs a text to speech of the neural network's lyrics over a beat.
 
 4. Enjoy (maybe) listening to your neural network's rap!
+
+# Let's hear something it made
+Okay... Here's some lyrics that it made - excuse the vulgarities, the neural network wrote it and not me.
+http://pastebin.com/raw/u0Vf7T4L
+
+And here is the recording of "speechtest.py" using those lyrics.
+http://vocaroo.com/i/s1liCOwMUhuZ
