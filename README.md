@@ -7,7 +7,7 @@ For example: I could feed it the lyrics of around 10 rap songs from various arti
 
 
 # How to use
-0. Install pybrain and pyttsx.
+0. Install pybrain (https://pypi.python.org/pypi/PyBrain/0.3.3), pronouncing (https://pypi.python.org/pypi/pronouncing), and pyttsx (https://pypi.python.org/pypi/pyttsx/1.1).
 
 1. Fill "lyrics.txt" with rap lyrics of your choosing - the more the better, as this is used to make a dataset and in this case large datasets return better results. Maybe around 6 or 7 songs is good -- avoid putting things like "[bridge]" or "[intro]" in there - only put in actual lines from the song - and separate each line by a newline (press the 'enter' key, usually).
 
