@@ -11,7 +11,7 @@ import random
 
 #fill lyrics.txt with the rap lyrics you want it to use. leave out anything that isn't a line, and keep it newline delimited.
 lyrics = open('lyrics.txt').read().split("\n")
-print lyrics
+
 # counts syllables in word
 def syllablecount(word):
     count = 0
@@ -45,7 +45,7 @@ def rhymeindex():
     rhyme_master_list = []
     for i in lyrics:
         word = re.sub(r"\W+", '', i.split(" ")[-1]).lower()
-        print word
+        print word + 'cscs'
         #print syllablesentencecount(word)
         rhymeslist = pronouncing.rhymes(word)
         rhymeslist = [x.encode('UTF8') for x in rhymeslist]
@@ -84,6 +84,7 @@ rhyme_master_list = rhymeindex()
 # debug stuff...
 print rhyme_master_list
 
+
 rapdict = []
 def dictionarybuilder():
     for i in lyrics:
@@ -107,6 +108,7 @@ for i in rapdict[:-3]:
         ds.addSample((twobars[0] / float(20), int(twobars[1]) / float(len(rhyme_master_list)), twobars[2] / float(20), int(twobars[3]) / float(len(rhyme_master_list))), (twobars[4] / float(20), int(twobars[5]) / float(len(rhyme_master_list)), twobars[6] / float(20), int(twobars[7]) / float(len(rhyme_master_list))))
 
 print ds
+print 'dss'
 
 # Only uncomment this if you are training it on lyrics yourself.
 # this part gets a neural network, trains it on lyrics and syllables and then saves it.
@@ -136,7 +138,10 @@ def formatbar(bar):
     for i in rapdict:
         if abs(i[1] - int(bar[0] * 20)) < 2 and i[2] == int((bar[1]) * len(rhyme_master_list)):
             if str(i[0]) not in lyricsused:
-                print str(i[0])
+                hs = open("neural_rap.txt", "a")
+                hs.write(str(i[0]) + " \n")
+                hs.close()
+
                 lyricsused.append(str(i[0]))
 
 #
