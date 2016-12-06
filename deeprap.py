@@ -108,7 +108,6 @@ for i in rapdict[:-3]:
         ds.addSample((twobars[0] / float(20), int(twobars[1]) / float(len(rhyme_master_list)), twobars[2] / float(20), int(twobars[3]) / float(len(rhyme_master_list))), (twobars[4] / float(20), int(twobars[5]) / float(len(rhyme_master_list)), twobars[6] / float(20), int(twobars[7]) / float(len(rhyme_master_list))))
 
 print ds
-print 'dss'
 
 # Only uncomment this if you are training it on lyrics yourself.
 # this part gets a neural network, trains it on lyrics and syllables and then saves it.
