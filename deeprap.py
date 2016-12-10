@@ -1,6 +1,5 @@
 import pronouncing
 import pyttsx
-engine = pyttsx.init()
 import re
 import pybrain
 from pybrain.datasets import SupervisedDataSet
