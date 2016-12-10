@@ -8,7 +8,6 @@ For example: I could feed it the lyrics of around 10 rap songs from various arti
 
 
 
-# How to use
 
 ## Write song
 
