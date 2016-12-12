@@ -1,3 +1,3 @@
 pronouncing==0.1.2
 pyttsx==1.1
-pybrain==0.3.3
+pybrain==0.3
