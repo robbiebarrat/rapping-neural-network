@@ -1,7 +1,7 @@
 # Rapping-neural-network
 I made this for my high school's programming club - which I'm the president/founder of.
 
-It's a neural network that has been trained on rap songs, and can rearrange any lyrics you throw it into a song that rhymes and has a flow (to an extent).
+It's a neural network that has been trained on rap songs, and can rearrange any lyrics you feed it into a song that rhymes and has a flow (to an extent).
 
 For example: I could feed it the lyrics of around 10 rap songs from various artists and it would in essence, combine lines from all of the songs you feed it to make a new song. There's also another file that helps it actually rap the song on a beat with text to speech.
 
@@ -20,6 +20,8 @@ Download the trained nn "trained_net-420000" https://docs.google.com/uc?id=0B-_m
 Fill "lyrics.txt" with rap lyrics of your choosing - the more the better - avoid putting things like "[bridge]" or "[intro]" in there - only put in actual lines from the song - and separate each line by a newline (press the 'enter' key, usually)
 
     python deeprap.py
+
+deeprap.py will show you some of its processes, and once it terminates 'neural_rap.txt' will contain the song the neural network has composed. You no longer have to add the good verses it generates by hand - It can select good verses and write them to the file itself.
     
 ## Generate sound
 
