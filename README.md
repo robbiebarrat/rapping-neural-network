@@ -21,7 +21,7 @@ Fill "lyrics.txt" with rap lyrics of your choosing - the more the better - avoid
 
     python deeprap.py
 
-deeprap.py will show you some of its processes, and once it terminates 'neural_rap.txt' will contain the song the neural network has composed. You no longer have to add the good verses it generates by hand - It can select good verses and write them to the file itself.
+deeprap.py will show you some of its processes, and once it terminates, 'neural_rap.txt' will contain the song the neural network has composed. You no longer have to add the good verses it generates by hand - It can select good verses and write them to the file itself.
     
 ## Generate sound
 
