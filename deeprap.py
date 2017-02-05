@@ -2,6 +2,7 @@
 import re
 import os
 import random
+import markovify
 import pronouncing
 import ast
 from pybrain.datasets import SupervisedDataSet
@@ -14,9 +15,41 @@ from pybrain.tools.xml.networkreader import NetworkReader
 #global variables (these affect the whole program)
 training = 0 #training of 0 means you just want to have it write a rap - training of 1 will train the network on the contents of lyrics.txt
 epoch = 200 #this is just the number of the folder you would like to load (folder contains the trained net and rhymes)
+word_by_word = 1 #if zero, the program will write using existing lines, if it is 1,a markov chain will be used to write raps word by word.
+filename = "lyrics.txt"
 
 if training == 1:
     print "*Training Mode*"
+    word_by_word = 0
+
+if word_by_word == 1:
+    print "*Writing the rap 'word by word'*"
+
+if word_by_word == 0:
+    print "*Writing the rap by rearranging existing lines -- 'line by line'*"
+
+# markov chain
+
+def markov(filename):
+    corpus = ""
+
+    # Get raw text as string.
+    with open(str(filename)) as f: #the filename contains the normal lyrics
+        text = f.read()
+        for line in text.split("\n"):
+            if line != "":
+                if line[-1] not in "!?.;)":
+                    corpus += line + ". "
+
+    # Build the model.
+    text_model = markovify.Text(corpus)
+
+
+    neural_lyrics = ""
+    for i in range(len(text.split("\n"))):
+        neural_lyrics += ((str(text_model.make_sentence())[:-1]))
+        neural_lyrics += ("\n")
+    return neural_lyrics
 
 # counts syllables in word
 def syllablecount(word):
@@ -145,7 +178,10 @@ def opennetwork(epoch):
 # the main function -- i'm in the process of cleaning this up and dividing it into smaller functions.
 def main():
     # the existing lyrics you've filled the text document with
-    lyrics = open('lyrics.txt').read().split("\n")
+    if word_by_word == 0:
+        lyrics = open(filename).read().split("\n")
+    elif word_by_word == 1:
+        lyrics = markov(filename).split("\n")
 
     # the (now empty) song the neural network is going to write
     song = []
@@ -225,7 +261,7 @@ def main():
 
                     # actually write the line to the song
                     song.append(line)
-                final_song.write("\n")
+                final_song.write("\n...\n")
                 print "Just wrote a verse to the file... - " + str(lyricsused)
                 lyricsused = []
 
