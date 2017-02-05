@@ -1,3 +1,4 @@
 pronouncing==0.1.2
 pyttsx==1.1
 pybrain==0.3
+markovify==0.5.4
