@@ -5,9 +5,9 @@ from time import sleep
 from threading import Thread
 
 # VARIABLES
-beat = "beat.mp3" 
-slowdown_rate = 30 #higher value means slower speech... keep it between ~50 and 0 depending on how fast the beat is.
-intro = 14 #amount in seconds it takes from the start of the beat to when the rapping should begin... how many seconds the AI waits to start rapping.
+beat_to_play = "beat2.mp3"
+slowdown_rate = 30 # hhigher value means slower speech... keep it between ~50 and 0 depending on how fast the beat is.
+intro = 21 #amount in seconds it takes from the start of the beat to when the rapping should begin... how many seconds the AI waits to start rapping.
 
 
 def play_mp3(path):
@@ -36,11 +36,17 @@ for i in lyrics:
 
 def sing():
     for line in wholesong.split(" ... "):
-        engine.say(str(line))
+        if line == "..." or line == "":
+            # the following is a really really awful way of making it pause between verses...
+            # sadly, pyttsx doesn't offer me any alternative.
+            for i in range(18):
+                engine.say("    ")
+        else:
+            engine.say(str(line))
     engine.runAndWait()
 
 def beat():
-    play_mp3("beat.mp3")
+    play_mp3(beat_to_play)
 
 
 Thread(target=beat).start()
