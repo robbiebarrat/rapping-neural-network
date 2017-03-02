@@ -26,11 +26,10 @@ deeprap.py contains a variable on line 15 - "training". You can set training to 
 
     python speechtest.py 
     
-beat.mp3 or beat2.mp3 is the beat
+one of the mp3 files (specified in speechtest.py as a global variable) is the beat
 
 # Let's hear something it made
 Okay... Here's a song it wrote *word by word* - excuse the vulgarities, the neural network wrote it and not me.
-http://pastebin.com/raw/5y1x9vHk
-
-And here is the recording of "speechtest.py" using those lyrics, and "beat2.mp3".
-https://www.youtube.com/watch?v=N8P3i8gBaVI&feature=youtu.be
+http://pastebin.com/raw/MUDc9Unt
+And here is the recording of "speechtest.py" using those lyrics, and "lofi_long.mp3".
+https://soundcloud.com/rapping_neural_network/networks-with-attitude
