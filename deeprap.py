@@ -32,7 +32,6 @@ if word_by_word == 0:
 
 def markov(filename):
     corpus = ""
-
     # Get raw text as string.
     with open(str(filename)) as f: #the filename contains the normal lyrics
         text = f.read()
@@ -41,15 +40,24 @@ def markov(filename):
                 if line[-1] not in "!?.;)":
                     corpus += line + ". "
 
+
     # Build the model.
     text_model = markovify.Text(corpus)
 
 
     neural_lyrics = ""
-    for i in range(len(text.split("\n"))):
-        neural_lyrics += ((str(text_model.make_sentence())[:-1]))
-        neural_lyrics += ("\n")
+    neural_last_words = []
+    while len(neural_lyrics.split("\n")) < (len(text.split("\n"))) / 2:
+        neural_line = ((str(text_model.make_sentence())[:-1]))
+        last_word = neural_line.split(" ")[-1]
+        if neural_last_words.count(last_word) < 2: # simply ensures that the markov chain won't generate a ton of lyrics that all end in the same word... this makes it hard for the nn to rhyme well.
+            neural_lyrics += neural_line
+            neural_lyrics += ("\n")
+        neural_last_words.append(last_word)
+
+    #print neural_lyrics
     return neural_lyrics
+
 
 # counts syllables in word
 def syllablecount(word):
