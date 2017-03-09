@@ -30,7 +30,7 @@ one of the mp3 files (specified in speechtest.py as a global variable) is the be
 
 # Let's hear something it made
 Okay... Here's a song it wrote *word by word* - excuse the vulgarities, the neural network wrote it and not me.
-http://pastebin.com/raw/MUDc9Unt
+http://pastebin.com/MUDc9Unt
 
 And here is the recording of "speechtest.py" using those lyrics, and "lofi_long.mp3".
 https://soundcloud.com/rapping_neural_network/networks-with-attitude
