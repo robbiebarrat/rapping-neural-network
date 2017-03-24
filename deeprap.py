@@ -32,45 +32,29 @@ if word_by_word == 0:
 
 def markov(filename):
     corpus = ""
-    sentence_list = []
     # Get raw text as string.
-    f = open(str(filename)) #the filename contains the normal lyrics
-    text = f.read()
-    for line in text.split("\n"):
-        sentence_list.append(line)
-    print sentence_list
+    with open(str(filename)) as f: #the filename contains the normal lyrics
+        text = f.read()
+        for line in text.split("\n"):
+            if line != "":
+                if line[-1] not in "!?.;)":
+                    corpus += line + ". "
 
-    formatted_sentence_list = []
-    for line in sentence_list:
-        if "\r" in line: # mac os likes to add \r to lines...
-            formatted_sentence_list.append(line[:-1] + ". ")
-        else:
-            formatted_sentence_list.append(line + ". ")
-    print formatted_sentence_list
-    corpus = "".join(formatted_sentence_list)
-    print corpus
-    print "Done the markov chain part... Building the model..."
 
     # Build the model.
     text_model = markovify.Text(corpus)
-    print "Done building the text model!"
+
 
     neural_lyrics = ""
     neural_last_words = []
-    failures = 0
-    while len(neural_lyrics.split("\n")) < (len(text.split("\n"))) / 2 and failures < 20000:
-        neural_line = ((str(text_model.make_sentence())))#[:-1]))
+    while len(neural_lyrics.split("\n")) < (len(text.split("\n"))) / 2:
+        neural_line = ((str(text_model.make_sentence())[:-1]))
         last_word = neural_line.split(" ")[-1]
         if neural_last_words.count(last_word) < 2: # simply ensures that the markov chain won't generate a ton of lyrics that all end in the same word... this makes it hard for the nn to rhyme well.
             neural_lyrics += neural_line
-            print neural_line
             neural_lyrics += ("\n")
-            print len(neural_lyrics.split("\n"))
-        else:
-            failures += 1
-            #print failures
         neural_last_words.append(last_word)
-    print "Done building the collection of word-by-word lyrics!"
+
     #print neural_lyrics
     return neural_lyrics
 
