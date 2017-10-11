@@ -57,6 +57,6 @@ Install (with python 2.x)
 
 Alright, so basically a markov chain will look at the lyrics you entered and generate new lines. Then, it feeds this to a recurrent neural net that will generate a sequence of tuples in the format of 
 
-    `(desired rhyme, desired count of syllables)` 
+    (desired rhyme, desired count of syllables)
 
 The program will then sift through the lines the markov chain generated, and match the lines to their corresponding tuples. The result is the rap.
