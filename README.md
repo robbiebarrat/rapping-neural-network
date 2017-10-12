@@ -26,7 +26,8 @@ Install (with python 2.x)
 **If you'd like to use Kanye's lyrics - skip this section**
 `Lyrics.txt` comes with Kanye's entire discography in it. You can either use this, or fill it with other lyrics.
 
-* Avoid putting things like "[bridge]" or "[intro]" in `lyrics.txt` 
+Guide to using your own lyrics with `lyrics.txt`
+* Avoid including things like "[bridge]" or "[intro]" 
 
 * Seperate each line by a newline
 
@@ -37,7 +38,7 @@ Install (with python 2.x)
 ### Training
 **Skip this part if you are using the default kanye lines**
 
-* In `model.py`, change `artist` to the name of the new artist you've used in `lyrics.txt`
+* In `model.py`, change the variable `artist` to the name of the new artist you've used in `lyrics.txt`
 
 * In `model.py`, change the variable `train_mode` to `True`
 
