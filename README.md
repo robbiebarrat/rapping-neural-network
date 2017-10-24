@@ -9,7 +9,7 @@ Quartz did a really nice profile on me and the program here; https://qz.com/9200
 Okay... Here's a song it wrote *word by word* using kanye's discography - excuse the vulgarities, the neural network wrote it and not me.
 https://soundcloud.com/rapping_neural_network/networks-with-attitude
 
-Here are the lyrics;
+# Lyrics to above song;
 <details>
   <summary>Click to expand</summary>
 
