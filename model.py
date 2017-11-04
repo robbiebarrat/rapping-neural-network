@@ -4,16 +4,15 @@ import re
 import random
 import numpy as np
 import os
-import keras
 from keras.models import Sequential
 from keras.layers import LSTM 
-from keras.layers.core import Dense
 
-depth = 4 # depth of the network. changing will require a retrain
-maxsyllables = 16 # maximum syllables per line. Change this freely without retraining the network
-train_mode = False
-artist = "kanye_west" # used when saving the trained model
-rap_file = "neural_rap.txt" # where the rap is written to
+depth = 4  # depth of the network. changing will require a retrain
+maxsyllables = 16  # maximum syllables per line. Change this freely without retraining the network
+train_mode = True
+artist = "em`"  # used when saving the trained model
+rap_file = "neural_rap.txt"  # where the rap is written to
+
 
 def create_network(depth):
 	model = Sequential()
@@ -23,35 +22,39 @@ def create_network(depth):
 	model.add(LSTM(2, return_sequences=True))
 	model.summary()
 	model.compile(optimizer='rmsprop',
-              loss='mse')
+				loss='mse')
 
-	if artist + ".rap" in os.listdir(".") and train_mode == False:
+	if artist + ".rap" in os.listdir(".") and not train_mode:
 		model.load_weights(str(artist + ".rap"))
 		print "loading saved network: " + str(artist) + ".rap" 
 	return model
+
 
 def markov(text_file):
 	read = open(text_file, "r").read()
 	text_model = markovify.NewlineText(read)
 	return text_model
 
+
 def syllables(line):
 	count = 0
 	for word in line.split(" "):
-		vowels = 'aeiouy'
-		word = word.lower().strip(".:;?!")
-		if word[0] in vowels:
-			count +=1
-		for index in range(1,len(word)):
-			if word[index] in vowels and word[index-1] not in vowels:
-				count +=1
-		if word.endswith('e'):
-			count -= 1
-		if word.endswith('le'):
-			count+=1
-		if count == 0:
-			count +=1
+		if word:
+			vowels = 'aeiouy'
+			word = word.lower().strip(".:;?!")
+			if word[0] in vowels:
+				count += 1
+			for index in range(1,len(word)):
+				if word[index] in vowels and word[index-1] not in vowels:
+					count += 1
+			if word.endswith('e'):
+				count -= 1
+			if word.endswith('le'):
+				count += 1
+			if count == 0:
+				count += 1
 	return count / maxsyllables
+
 
 def rhymeindex(lyrics):
 	if str(artist) + ".rhymes" in os.listdir(".") and train_mode == False:
@@ -85,6 +88,7 @@ def rhymeindex(lyrics):
 		print rhymelist
 		return rhymelist
 
+
 def rhyme(line, rhyme_list):
 	word = re.sub(r"\W+", '', line.split(" ")[-1]).lower()
 	rhymeslist = pronouncing.rhymes(word)
@@ -112,7 +116,7 @@ def split_lyrics_file(text_file):
 	return text
 
 
-def generate_lyrics(text_model, text_file):
+def generate_lyrics(text_file):
 	bars = []
 	last_words = []
 	lyriclength = len(open(text_file).read().split("\n"))
@@ -122,7 +126,7 @@ def generate_lyrics(text_model, text_file):
 	while len(bars) < lyriclength / 9 and count < lyriclength * 2:
 		bar = markov_model.make_sentence()
 
-		if type(bar) != type(None) and syllables(bar) < 1:
+		if not isinstance(bar, type(None)) and syllables(bar) < 1:
 			
 			def get_last_word(bar):
 				last_word = bar.split(" ")[-1]
@@ -137,9 +141,9 @@ def generate_lyrics(text_model, text_file):
 				count += 1
 	return bars
 
+
 def build_dataset(lines, rhyme_list):
 	dataset = []
-	line_list = []
 	for line in lines:
 		line_list = [line, syllables(line), rhyme(line, rhyme_list)]
 		dataset.append(line_list)
@@ -169,8 +173,9 @@ def build_dataset(lines, rhyme_list):
 	#print "x shape " + str(x_data.shape)
 	#print "y shape " + str(y_data.shape)
 	return x_data, y_data
-	
-def compose_rap(lines, rhyme_list, lyrics_file, model):
+
+
+def compose_rap(rhyme_list, lyrics_file, model):
 	rap_vectors = []
 	human_lyrics = split_lyrics_file(lyrics_file)
 	
@@ -188,11 +193,13 @@ def compose_rap(lines, rhyme_list, lyrics_file, model):
 		rap_vectors.append(model.predict(np.array([rap_vectors[-1]]).flatten().reshape(1, 2, 2)))
 	
 	return rap_vectors
-	
+
+
 def vectors_into_song(vectors, generated_lyrics, rhyme_list):
 	print "\n\n"	
 	print "About to write rap (this could take a moment)..."
 	print "\n\n"
+
 	def last_word_compare(rap, line2):
 		penalty = 0 
 		for line1 in rap:
@@ -232,11 +239,7 @@ def vectors_into_song(vectors, generated_lyrics, rhyme_list):
 	for vector in vectors:
 		vector_halves.append(list(vector[0][0])) 
 		vector_halves.append(list(vector[0][1]))
-		
 
-	
-
-		
 	for vector in vector_halves:
 		scorelist = []
 		for item in dataset:
@@ -266,35 +269,42 @@ def vectors_into_song(vectors, generated_lyrics, rhyme_list):
 				break
 	return rap
 
+
 def train(x_data, y_data, model):
-	model.fit(np.array(x_data), np.array(y_data),
-			  batch_size=2,
-			  epochs=5,
-			  verbose=1)
-	model.save_weights(artist + ".rap")
-			  
+	if x_data.size != 0 and y_data.size != 0:
+		model.fit(np.array(x_data), np.array(y_data),
+				  batch_size=2,
+				  epochs=5,
+				  verbose=1)
+		model.save_weights(artist + ".rap")
+	else:
+		print "Not enough lyrics. Please provide more lyrics."
+		exit()
+
+
 def main(depth, train_mode):
 	model = create_network(depth)
 	text_file = "lyrics.txt"
 	text_model = markov(text_file)
 	
-	if train_mode == True:
+	if train_mode:
 		bars = split_lyrics_file(text_file)
-	
-	if train_mode == False:
-		bars = generate_lyrics(text_model, text_file)
+	else:
+		bars = generate_lyrics(text_file)
 	
 	rhyme_list = rhymeindex(bars)
-	if train_mode == True:
+	if train_mode:
 		x_data, y_data = build_dataset(bars, rhyme_list)
 		train(x_data, y_data, model)
 
-	if train_mode == False:
-		vectors = compose_rap(bars, rhyme_list, text_file, model)
+	if not train_mode:
+		vectors = compose_rap(rhyme_list, text_file, model)
 		rap = vectors_into_song(vectors, bars, rhyme_list)
 		f = open(rap_file, "w")
 		for bar in rap:
 			f.write(bar)
 			f.write("\n")
-		
-main(depth, train_mode)
+
+
+if __name__ == '__main__':
+	main(depth, train_mode)
