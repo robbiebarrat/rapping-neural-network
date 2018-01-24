@@ -204,6 +204,8 @@ Install (with python 2.x)
 
 ## Usage
 
+### See [documented_model.py](https://raw.githubusercontent.com/robbiebarrat/rapping-neural-network/master/documented_model.py) for notes as python comments.
+
 ### Data preperation
 **If you'd like to use Kanye's lyrics - skip this section**
 `Lyrics.txt` comes with Kanye's entire discography in it. You can either use this, or fill it with other lyrics.
