@@ -1,9 +1,11 @@
 # Rapping-neural-network
-This is a generative art project I made for my high school's programming club - which ~I'm the president/founder of~ I was the president/founder of until I graduated the other month.
+This is a generative art project I made for my high school's programming club - which ~I'm the president/founder of~ I was the president/founder of until I graduated.
 
 It's a neural network that has been trained on Kanye West's discography, and can use any lyrics you feed it and write a new song *word by word* that rhymes and has a flow (to an extent).
 
 Quartz did a really nice profile on me and the program here; https://qz.com/920091/a-west-virginia-teen-taught-himself-how-to-build-a-rapping-ai-using-kanye-west-lyrics/
+
+## UPDATE: Here's a Google Colab notebook that runs the project: https://goo.gl/GHSWzZ
 
 # Let's hear something it made
 Okay... Here's a song it wrote *word by word* using kanye's discography - excuse the vulgarities, the neural network wrote it and not me.
