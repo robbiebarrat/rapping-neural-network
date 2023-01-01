@@ -3,3 +3,4 @@ pyttsx==1.1
 markovify==0.5.4
 Keras==1.2.2
 numpy==1.12.1
+tensorflow==1.5.0
